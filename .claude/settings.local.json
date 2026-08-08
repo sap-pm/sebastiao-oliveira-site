@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "Bash(curl -sL \"https://upload.wikimedia.org/wikipedia/commons/9/93/AVANTE_Brazil_Logo.png\" -o \"/c/Users/Clawb/Downloads/sebastiao-oliveira-site/assets/logo-avante.png\")",
+      "Bash(python3 -)",
+      "Bash(node -e ' *)"
+    ]
+  }
+}

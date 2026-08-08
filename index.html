@@ -1,0 +1,1286 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sebastião Oliveira — Deputado Estadual 70123 | Pré-candidatura à reeleição</title>
+<meta name="description" content="Sebastião Oliveira, pré-candidato à reeleição para Deputado Estadual. A força que nasce do Sertão, de novo, para continuar ajudando Pernambuco.">
+
+<!-- ============================================================
+     OPEN GRAPH / COMPARTILHAMENTO (WhatsApp, Instagram, etc.)
+     ============================================================ -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sebastião Oliveira — 70123 | Clawber de novo, pela continuidade de Pernambuco">
+<meta property="og:description" content="Pré-candidatura à reeleição de Sebastião Oliveira a Deputado Estadual. Trajetória, trabalho e compromisso com Pernambuco.">
+<meta property="og:image" content="assets/og-image.png">
+<meta name="theme-color" content="#F6EEDC">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS — identidade visual Sebastião Oliveira (tema claro)
+   Trocar aqui para reaproveitar o template em outro pré-candidato
+   ============================================================ */
+:root{
+  --terracota: #D15B26;
+  --terracota-dim: #a3441a;
+  --terracota-soft: #f2d9c8;
+  --verde: #19A59D;
+  --verde-dim: #10756f;
+  --verde-soft: #cdeae7;
+  --ouro: #E8A93E;
+  --creme: #FBF6EA;
+  --bg: #F6EEDC;
+  --bg-alt: #EFE3C8;
+  --surface: #FFFFFF;
+  --ink: #2B2013;
+  --ink-soft: #6b5c46;
+  --line: rgba(43,32,19,0.14);
+
+  --font-display: 'Baloo 2', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+
+  --container: 1240px;
+  --edge: clamp(24px, 6vw, 96px);
+}
+
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-weight:400;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+h1,h2,h3,h4{ font-family:var(--font-display); font-weight:800; line-height:1.06; letter-spacing:-0.01em; color:var(--ink); }
+.container{ max-width:var(--container); margin:0 auto; padding-left:var(--edge); padding-right:var(--edge); }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+}
+
+/* ============================================================
+   MOSAICO SERTANEJO — elemento de assinatura da marca
+   (inspirado no material gráfico original: sol, estrada, cacto,
+   igreja, mapa de PE, renda — em ladrilho, tom claro)
+   ============================================================ */
+.mosaic-band{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(64px,1fr));
+  grid-auto-rows:64px; width:100%; overflow:hidden;
+}
+.mosaic-tile{ display:flex; align-items:center; justify-content:center; }
+.mosaic-tile svg{ width:26px; height:26px; opacity:0.92; }
+.mosaic-tile:nth-child(6n+1){ background:var(--terracota); }
+.mosaic-tile:nth-child(6n+2){ background:var(--creme); }
+.mosaic-tile:nth-child(6n+3){ background:var(--verde); }
+.mosaic-tile:nth-child(6n+4){ background:var(--ouro); }
+.mosaic-tile:nth-child(6n+5){ background:var(--creme); }
+.mosaic-tile:nth-child(6n+6){ background:var(--verde-dim); }
+.mosaic-tile:nth-child(6n+1) svg{ stroke:var(--creme); fill:var(--creme); }
+.mosaic-tile:nth-child(6n+2) svg{ stroke:var(--terracota); fill:var(--terracota); }
+.mosaic-tile:nth-child(6n+3) svg{ stroke:var(--creme); fill:var(--creme); }
+.mosaic-tile:nth-child(6n+4) svg{ stroke:var(--creme); fill:var(--creme); }
+.mosaic-tile:nth-child(6n+5) svg{ stroke:var(--verde-dim); fill:var(--verde-dim); }
+.mosaic-tile:nth-child(6n+6) svg{ stroke:var(--creme); fill:var(--creme); }
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+.progress-bar{
+  position:fixed; top:0; left:0; height:3px; width:100%;
+  background:linear-gradient(90deg, var(--terracota), var(--ouro), var(--verde));
+  transform-origin:left; transform:scaleX(0);
+  z-index:9000;
+}
+
+/* ============================================================
+   PRELOADER / INTRO
+   ============================================================ */
+#preloader{
+  position:fixed; inset:0; z-index:10000;
+  background:var(--creme);
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column;
+}
+.pre-eyebrow{
+  font-family:var(--font-body); font-weight:700; font-size:13px;
+  letter-spacing:0.35em; text-transform:uppercase;
+  color:var(--ink-soft); margin-bottom:18px; opacity:0;
+}
+.pre-name{
+  font-family:var(--font-display); font-weight:800;
+  font-size:clamp(2.2rem, 8vw, 5.4rem);
+  text-align:center; line-height:1.04;
+}
+.pre-name .line{ display:block; opacity:0; filter:blur(16px); transform:scale(1.045); will-change:opacity,filter,transform; }
+.pre-name .l1{ color:var(--terracota); }
+.pre-name .l2{ color:var(--verde); }
+.pre-symbol-row{
+  margin-top:32px; display:flex; align-items:center; gap:20px; opacity:0;
+}
+.pre-logo-slot{ height:44px; display:flex; align-items:center; justify-content:center; }
+.pre-logo-slot img{ height:100%; width:auto; object-fit:contain; }
+.pre-symbol-divider{ width:1.5px; height:36px; background:var(--line); }
+.pre-slogan{
+  margin-top:16px; font-size:13.5px; font-style:italic; color:var(--ink-soft);
+  letter-spacing:0.02em; opacity:0; text-align:center;
+}
+.pre-number-wrap{
+  display:flex; align-items:center; gap:14px;
+}
+.pre-number-label{
+  font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-soft); font-weight:600;
+}
+.pre-number{
+  font-family:var(--font-display); font-weight:800; font-size:clamp(1.6rem,4vw,2.4rem);
+  color:var(--terracota-dim); font-variant-numeric:tabular-nums; letter-spacing:0.04em;
+}
+.pre-bar-track{
+  margin-top:34px; width:min(280px, 60vw); height:4px; border-radius:2px;
+  background:var(--bg-alt); overflow:hidden; opacity:0;
+}
+.pre-bar-fill{
+  height:100%; width:0%;
+  background:linear-gradient(90deg, var(--terracota), var(--verde));
+}
+.curtain{
+  position:fixed; top:0; width:50vw; height:100vh; z-index:9999;
+}
+.curtain-l{ left:0; background:var(--terracota); }
+.curtain-r{ right:0; background:var(--verde); }
+.curtain .mark{
+  position:absolute; top:50%; width:60px; height:60px;
+  transform:translateY(-50%);
+}
+.curtain-l .mark{ right:-30px; }
+.curtain-r .mark{ left:-30px; transform:translateY(-50%) scaleX(-1); }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+header.site-nav{
+  position:fixed; top:0; left:0; width:100%; z-index:500;
+  padding:18px var(--edge);
+  display:flex; align-items:center; justify-content:space-between;
+  transform:translateY(-120%);
+}
+header.site-nav.visible{ transform:translateY(0); transition:transform 0.6s cubic-bezier(.16,.84,.44,1); }
+header.site-nav.solid{ background:rgba(246,238,220,0.92); backdrop-filter:blur(10px); box-shadow:0 1px 0 var(--line); }
+.nav-brand{ display:flex; align-items:center; gap:8px; font-family:var(--font-display); font-weight:800; font-size:1.15rem; }
+.nav-brand .b1{ color:var(--terracota); }
+.nav-brand .b2{ color:var(--verde-dim); }
+.nav-links{ display:flex; gap:30px; font-size:14px; font-weight:700; }
+.nav-links a{ opacity:0.78; position:relative; transition:opacity 0.2s ease; }
+.nav-links a:hover{ opacity:1; }
+.nav-links a::after{
+  content:''; position:absolute; left:0; bottom:-6px; width:0; height:2px;
+  background:var(--terracota); transition:width 0.25s ease;
+}
+.nav-links a:hover::after{ width:100%; }
+.nav-actions{ display:flex; align-items:center; gap:14px; }
+.nav-insta{
+  width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  border:1.5px solid var(--line); transition:border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.nav-insta:hover{ border-color:var(--terracota); background:var(--terracota-soft); color:var(--terracota-dim); }
+.nav-cta{
+  font-size:13px; font-weight:700; padding:11px 24px; border-radius:100px;
+  background:var(--terracota); color:#fff; letter-spacing:0.02em;
+  transition:transform 0.2s ease, background 0.2s ease;
+}
+.nav-cta:hover{ background:var(--terracota-dim); transform:translateY(-1px); }
+
+/* ============================================================
+   GHOST NUMBER WATERMARK
+   ============================================================ */
+.ghost-number{
+  position:absolute; z-index:0; pointer-events:none; user-select:none;
+  font-family:var(--font-display); font-weight:800;
+  font-size:clamp(9rem, 26vw, 26rem);
+  color:transparent; -webkit-text-stroke:1.5px rgba(43,32,19,0.055);
+  white-space:nowrap; line-height:1;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative; min-height:100vh; display:flex; align-items:center;
+  overflow:hidden; padding-top:150px; padding-bottom:70px;
+}
+.hero .ghost-number{ top:6%; right:-6%; transform:rotate(-8deg); }
+.hero-grid{
+  position:relative; z-index:2;
+  display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
+  width:100%;
+}
+.hero-eyebrow{
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:13px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--terracota-dim); margin-bottom:22px;
+}
+.hero-eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--verde); }
+.hero h1{
+  font-size:clamp(2.5rem, 5.1vw, 4.3rem);
+  margin-bottom:24px;
+}
+.hero h1 .accent{ color:var(--terracota); }
+.hero-lede{
+  max-width:520px; font-size:1.12rem; color:var(--ink-soft); margin-bottom:34px;
+}
+.hero-actions{ display:flex; gap:16px; flex-wrap:wrap; align-items:center; }
+.btn-primary{
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--terracota); color:#fff; font-weight:700; font-size:15px;
+  padding:16px 30px; border-radius:100px; transition:transform 0.25s ease, background 0.25s ease;
+  box-shadow:0 10px 24px -12px rgba(161,68,26,0.55);
+}
+.btn-primary:hover{ background:var(--terracota-dim); transform:translateY(-2px); }
+.btn-ghost{
+  display:inline-flex; align-items:center; gap:8px;
+  border:1.5px solid var(--line); color:var(--ink);
+  font-weight:700; font-size:15px; padding:15px 26px; border-radius:100px;
+  transition:border-color 0.25s ease, background 0.25s ease;
+}
+.btn-ghost:hover{ border-color:var(--verde); background:var(--verde-soft); }
+.hero-number-badge{
+  margin-top:40px; display:inline-flex; align-items:baseline; gap:14px;
+  padding-top:22px; border-top:1px solid var(--line);
+}
+.hero-number-badge .n{
+  font-family:var(--font-display); font-weight:800; font-size:2.1rem; color:var(--verde-dim);
+  font-variant-numeric:tabular-nums;
+}
+.hero-number-badge .label{ font-size:12.5px; color:var(--ink-soft); max-width:220px; letter-spacing:0.01em; font-weight:600; }
+.hero-updated{
+  margin-top:14px; font-size:11.5px; color:var(--ink-soft); opacity:0.75; letter-spacing:0.02em;
+}
+
+/* FOTO REAL do candidato */
+.hero-photo{ position:relative; aspect-ratio:4/5; }
+.hero-photo-frame{
+  position:relative; height:100%; border-radius:22px; overflow:hidden;
+  border:6px solid var(--surface);
+  box-shadow:0 24px 50px -20px rgba(43,32,19,0.28);
+}
+.hero-photo-frame img{ width:100%; height:100%; object-fit:cover; object-position:60% 20%; }
+.hero-photo-tag{
+  position:absolute; bottom:-18px; left:-18px; z-index:3;
+  background:var(--surface); border-radius:16px; padding:14px 20px;
+  box-shadow:0 14px 30px -14px rgba(43,32,19,0.3);
+  display:flex; align-items:center; gap:12px;
+}
+.hero-photo-tag .n{ font-family:var(--font-display); font-weight:800; color:var(--terracota); font-size:1.6rem; }
+.hero-photo-tag .t{ font-size:11.5px; color:var(--ink-soft); font-weight:700; max-width:110px; line-height:1.3; }
+
+/* PLACEHOLDERS de foto — reservados para material ainda não enviado */
+.photo-slot{
+  position:relative; border-radius:18px; overflow:hidden;
+  border:1.5px dashed rgba(43,32,19,0.22);
+  background:
+    repeating-linear-gradient(135deg, rgba(43,32,19,0.028) 0 2px, transparent 2px 14px),
+    var(--surface);
+  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px;
+  color:var(--ink-soft);
+}
+.photo-slot img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.photo-slot .ph-icon{ width:28px; height:28px; opacity:0.55; }
+.photo-slot .ph-label{ font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; text-align:center; padding:0 16px; }
+
+.scroll-cue{
+  position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  color:var(--ink-soft); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; z-index:2; font-weight:700;
+}
+.scroll-cue svg{ animation:bob 1.8s ease-in-out infinite; }
+@keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(8px);} }
+
+/* ============================================================
+   SEÇÃO GENÉRICA
+   ============================================================ */
+.section{ position:relative; padding:120px 0; }
+.section-alt{ background:var(--surface); }
+.eyebrow{
+  display:inline-block; font-size:13px; font-weight:700; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--verde-dim); margin-bottom:18px;
+}
+.section-head{ max-width:680px; margin-bottom:60px; }
+.section-head h2{ font-size:clamp(2rem, 4vw, 2.9rem); }
+.section-head p{ margin-top:16px; color:var(--ink-soft); font-size:1.05rem; max-width:560px; }
+
+.text-placeholder{
+  position:relative; padding:22px 24px; border-radius:14px;
+  border:1.5px dashed rgba(209,91,38,0.4); background:var(--terracota-soft);
+  color:var(--ink-soft); font-style:italic; font-size:0.98rem;
+}
+.text-placeholder::before{
+  content:'CONTEÚDO A DEFINIR'; display:block; font-style:normal; font-weight:800;
+  font-size:10.5px; letter-spacing:0.14em; color:var(--terracota-dim); margin-bottom:10px;
+  font-family:var(--font-body);
+}
+
+/* ============================================================
+   TRAJETÓRIA — timeline
+   ============================================================ */
+.timeline{ position:relative; margin-top:20px; }
+.timeline::before{
+  content:''; position:absolute; left:15px; top:6px; bottom:6px; width:2px;
+  background:linear-gradient(180deg, var(--terracota), var(--verde));
+}
+.t-item{ position:relative; padding-left:56px; margin-bottom:48px; opacity:0; transform:translateX(-24px); }
+.t-item:last-child{ margin-bottom:0; }
+.t-item::before{
+  content:''; position:absolute; left:6px; top:6px; width:20px; height:20px; border-radius:50%;
+  background:var(--bg); border:3px solid var(--verde);
+}
+.t-year{ font-family:var(--font-display); font-weight:800; color:var(--verde-dim); font-size:14px; letter-spacing:0.06em; }
+.t-title{ font-size:1.25rem; margin:6px 0 8px 0; }
+.t-body{ color:var(--ink-soft); max-width:560px; font-size:0.98rem; }
+
+.trajetoria-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; }
+.trajetoria-photos{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.trajetoria-photos .photo-slot:first-child{ grid-column:1/-1; aspect-ratio:16/10; }
+.trajetoria-photos .photo-slot{ aspect-ratio:1/1; }
+
+/* ============================================================
+   O QUE JÁ FIZEMOS
+   ============================================================ */
+.fizemos-grid{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:22px;
+}
+.feito-card{
+  background:var(--surface); border:1.5px solid var(--line); border-radius:20px;
+  overflow:hidden; opacity:0; transform:translateY(30px);
+  box-shadow:0 12px 28px -18px rgba(43,32,19,0.16);
+}
+.feito-card .feito-photo{ aspect-ratio:16/10; border-radius:0; border-width:0 0 1.5px 0; }
+.feito-card .feito-body{ padding:24px; }
+.feito-card .f-icon{
+  width:42px; height:42px; border-radius:12px; margin-bottom:16px;
+  display:flex; align-items:center; justify-content:center; background:var(--verde);
+}
+.feito-card:nth-child(2) .f-icon{ background:var(--terracota); }
+.feito-card:nth-child(3) .f-icon{ background:var(--ouro); }
+.feito-card:nth-child(4) .f-icon{ background:var(--verde-dim); }
+.feito-card:nth-child(5) .f-icon{ background:var(--terracota-dim); }
+.feito-card h3{ font-size:1.12rem; margin-bottom:10px; }
+.feito-card .text-placeholder{ font-size:0.9rem; padding:14px 16px; }
+
+/* ============================================================
+   O QUE DEFENDEMOS (cards horizontais)
+   ============================================================ */
+.propostas-scroller{
+  display:flex; gap:22px; overflow-x:auto; padding:8px var(--edge) 32px var(--edge);
+  margin:0 calc(var(--edge) * -1); scroll-snap-type:x proximity;
+}
+.proposta-card{
+  scroll-snap-align:start; flex:0 0 min(320px, 82vw);
+  background:var(--surface); border:1.5px solid var(--line);
+  border-radius:20px; padding:32px 26px; opacity:0; transform:translateY(30px);
+  box-shadow:0 12px 28px -18px rgba(43,32,19,0.16);
+}
+.proposta-card .p-icon{
+  width:48px; height:48px; border-radius:13px; margin-bottom:20px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--terracota);
+}
+.proposta-card:nth-child(2) .p-icon{ background:var(--verde); }
+.proposta-card:nth-child(3) .p-icon{ background:var(--ouro); }
+.proposta-card:nth-child(4) .p-icon{ background:var(--terracota-dim); }
+.proposta-card:nth-child(5) .p-icon{ background:var(--verde-dim); }
+.proposta-card:nth-child(6) .p-icon{ background:var(--ouro); }
+.proposta-card h3{ font-size:1.24rem; margin-bottom:12px; }
+.proposta-card .text-placeholder{ font-size:0.92rem; padding:16px 18px; }
+
+/* ============================================================
+   PERNAMBUCO — seção territorial
+   ============================================================ */
+.pe-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px; align-items:center; }
+.pe-map-wrap{ position:relative; display:flex; align-items:center; justify-content:center; }
+.pe-map-wrap svg{ width:100%; max-width:340px; height:auto; }
+.pe-regioes{ display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; margin-top:8px; }
+.pe-regiao-slot{
+  border:1.5px dashed rgba(43,32,19,0.22); border-radius:14px; padding:16px 18px;
+  background:var(--surface); font-size:12.5px; font-weight:700; color:var(--ink-soft);
+  letter-spacing:0.02em;
+}
+
+/* ============================================================
+   COMUNIDADE
+   ============================================================ */
+.comunidade-grid{
+  display:grid; grid-template-columns:repeat(6, 1fr); grid-auto-rows:126px; gap:14px;
+}
+.comunidade-grid .photo-slot:nth-child(1){ grid-column:span 3; grid-row:span 2; }
+.comunidade-grid .photo-slot:nth-child(2){ grid-column:span 3; grid-row:span 3; }
+.comunidade-grid .photo-slot:nth-child(3){ grid-column:span 2; grid-row:span 2; }
+.comunidade-grid .photo-slot:nth-child(4){ grid-column:span 2; grid-row:span 2; }
+.comunidade-grid .photo-slot:nth-child(5){ grid-column:span 2; grid-row:span 3; }
+.comunidade-grid .photo-slot:nth-child(6){ grid-column:span 3; grid-row:span 2; }
+.comunidade-social{ margin-top:32px; display:flex; align-items:center; gap:12px; }
+.comunidade-social a{
+  display:inline-flex; align-items:center; gap:10px; padding:12px 20px; border-radius:100px;
+  border:1.5px solid var(--line); font-weight:700; font-size:13.5px; transition:border-color 0.2s ease, background 0.2s ease;
+}
+.comunidade-social a:hover{ border-color:var(--terracota); background:var(--terracota-soft); }
+
+/* ============================================================
+   CICLO / CONTADOR
+   ============================================================ */
+.ciclo{
+  position:relative; border-radius:28px; margin:0 var(--edge);
+  padding:76px var(--edge); overflow:hidden;
+  background:var(--ink); color:var(--creme); text-align:center;
+}
+.ciclo .ghost-number{ top:-14%; left:-6%; -webkit-text-stroke:1.5px rgba(251,246,234,0.07); }
+.ciclo-inner{ position:relative; z-index:2; max-width:640px; margin:0 auto; }
+.ciclo .eyebrow{ color:var(--ouro); }
+.ciclo h2{ font-size:clamp(1.9rem, 3.6vw, 2.7rem); color:var(--creme); margin-bottom:18px; }
+.ciclo p{ color:rgba(251,246,234,0.72); margin-bottom:40px; }
+.ciclo-counter{
+  display:flex; flex-direction:column; align-items:center; gap:10px; margin-bottom:30px;
+}
+.ciclo-counter .count-number{
+  font-family:var(--font-display); font-weight:800; font-size:clamp(2.4rem,6vw,3.6rem);
+  color:var(--creme); font-variant-numeric:tabular-nums; line-height:1;
+}
+.ciclo-counter .count-label{
+  font-size:13.5px; color:rgba(251,246,234,0.68); font-weight:600; letter-spacing:0.02em;
+}
+.ciclo-progress-track{
+  width:100%; max-width:420px; height:6px; border-radius:3px; margin:0 auto;
+  background:rgba(251,246,234,0.14); overflow:hidden;
+}
+.ciclo-progress-fill{
+  height:100%; width:0%; background:linear-gradient(90deg, var(--terracota-glow,#e8865a), var(--ouro));
+  transition:width 0.6s ease;
+}
+.ciclo-note{ margin-top:16px; font-size:11.5px; color:rgba(251,246,234,0.5); }
+
+/* ============================================================
+   AGENDA / ATUALIZAÇÕES
+   ============================================================ */
+.agenda-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:22px; }
+.agenda-card{
+  background:var(--surface); border:1.5px solid var(--line); border-radius:18px; overflow:hidden;
+  opacity:0; transform:translateY(24px);
+}
+.agenda-card .agenda-photo{ aspect-ratio:16/10; border-radius:0; border-width:0 0 1.5px 0; }
+.agenda-card .agenda-body{ padding:20px 22px; }
+.agenda-date{ font-size:11.5px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--terracota-dim); margin-bottom:8px; }
+.agenda-card h3{ font-size:1.05rem; margin-bottom:8px; }
+.agenda-card p{ font-size:0.9rem; color:var(--ink-soft); margin-bottom:14px; }
+.agenda-link{ font-size:12.5px; font-weight:700; color:var(--verde-dim); }
+
+/* ============================================================
+   ACOMPANHE (antes "Apoie")
+   ============================================================ */
+.apoie{
+  position:relative; border-radius:28px; margin:0 var(--edge);
+  padding:76px var(--edge); overflow:hidden;
+  background:var(--surface);
+  border:1.5px solid var(--line);
+}
+.apoie .ghost-number{ top:-10%; right:-8%; }
+.apoie-inner{ position:relative; z-index:2; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+.apoie h2{ font-size:clamp(1.9rem, 3.4vw, 2.6rem); margin-bottom:16px; }
+.apoie p{ color:var(--ink-soft); max-width:440px; }
+.apoie-form{
+  background:var(--bg); border:1.5px solid var(--line);
+  border-radius:20px; padding:32px;
+}
+.form-row{ margin-bottom:18px; }
+.form-row label{ display:block; font-size:12.5px; font-weight:700; letter-spacing:0.02em; margin-bottom:8px; color:var(--ink-soft); }
+.form-row input{
+  width:100%; padding:14px 16px; border-radius:10px; font-family:inherit; font-size:14.5px;
+  background:var(--surface); border:1.5px solid var(--line); color:var(--ink);
+  transition:border-color 0.2s ease;
+}
+.form-row input:focus{ outline:none; border-color:var(--verde); }
+.form-row input::placeholder{ color:rgba(43,32,19,0.32); }
+.form-consent{ display:flex; gap:10px; align-items:flex-start; margin-bottom:22px; }
+.form-consent input{ width:auto; margin-top:3px; accent-color:var(--verde); }
+.form-consent label{ font-size:12px; color:var(--ink-soft); line-height:1.5; font-weight:500; }
+.form-submit{ width:100%; justify-content:center; }
+.form-note{
+  margin-top:16px; font-size:11px; color:var(--ink-soft); text-align:center; opacity:0.8;
+}
+.form-status{
+  margin-top:14px; font-size:12.5px; text-align:center; color:var(--verde-dim); font-weight:700; min-height:16px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{ padding:70px 0 40px 0; background:var(--ink); color:var(--creme); }
+footer a{ color:var(--creme); }
+.footer-top{
+  display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:56px; margin-bottom:56px;
+}
+.footer-brand{ font-family:var(--font-display); font-weight:800; font-size:1.5rem; margin-bottom:14px; }
+.footer-brand .b1{ color:var(--terracota-glow, #e8865a); }
+.footer-brand .b2{ color:#5fd6cc; }
+.footer-tagline{ color:rgba(251,246,234,0.65); font-size:0.95rem; max-width:320px; }
+.footer-col h4{ font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(251,246,234,0.55); margin-bottom:18px; font-family:var(--font-body); font-weight:700; }
+.footer-col ul li{ margin-bottom:12px; }
+.footer-col ul li a{ color:rgba(251,246,234,0.8); font-size:14.5px; transition:color 0.2s ease; }
+.footer-col ul li a:hover{ color:#5fd6cc; }
+.social-row{ display:flex; gap:12px; margin-top:6px; }
+.social-row a{
+  width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  border:1.5px solid rgba(251,246,234,0.22); transition:border-color 0.2s ease, background 0.2s ease;
+}
+.social-row a:hover{ border-color:#5fd6cc; background:rgba(95,214,204,0.12); }
+.legal-box{
+  padding:22px 24px; border-radius:14px; background:rgba(251,246,234,0.06);
+  border:1px solid rgba(251,246,234,0.16); font-size:12.5px; color:rgba(251,246,234,0.72); line-height:1.7;
+  margin-bottom:26px;
+}
+.legal-box strong{ color:var(--ouro); }
+.footer-bottom{
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  font-size:12.5px; color:rgba(251,246,234,0.5);
+}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width: 980px){
+  .hero-grid{ grid-template-columns:1fr; }
+  .hero-photo{ order:-1; aspect-ratio:16/11; }
+  .trajetoria-grid{ grid-template-columns:1fr; gap:40px; }
+  .pe-grid{ grid-template-columns:1fr; gap:40px; }
+  .apoie-inner{ grid-template-columns:1fr; }
+  .footer-top{ grid-template-columns:1fr; gap:36px; }
+  .comunidade-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:160px; }
+  .comunidade-grid .photo-slot{ grid-column:span 1 !important; grid-row:span 2 !important; }
+  .mosaic-band{ grid-auto-rows:48px; }
+  .mosaic-tile svg{ width:20px; height:20px; }
+}
+@media (max-width: 720px){
+  .nav-links{ display:none; }
+  .apoie{ margin:0 16px; padding:48px 22px; }
+  .ciclo{ margin:0 16px; padding:56px 22px; }
+  .section{ padding:84px 0; }
+  .hero{ padding-top:120px; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ============================================================
+     PRELOADER
+     ============================================================ -->
+<div id="preloader" aria-hidden="true">
+  <span class="pre-eyebrow" id="preEyebrow">Deputado Estadual</span>
+  <h1 class="pre-name">
+    <span class="line l1" id="preLine1"></span>
+    <span class="line l2" id="preLine2"></span>
+  </h1>
+  <div class="pre-symbol-row" id="preSymbolRow">
+    <div class="pre-logo-slot" id="preLogo"><img src="assets/logo-avante.png" alt="Logo do partido Avante"></div>
+    <span class="pre-symbol-divider"></span>
+    <div class="pre-number-wrap" id="preNumberWrap">
+      <span class="pre-number-label">Número</span>
+      <span class="pre-number" id="preNumber">00000</span>
+    </div>
+  </div>
+  <p class="pre-slogan" id="preSlogan"></p>
+  <div class="pre-bar-track" id="preBarTrack"><div class="pre-bar-fill" id="preBarFill"></div></div>
+</div>
+<div class="curtain curtain-l" id="curtainL">
+  <svg class="mark" viewBox="0 0 64 64" fill="none"><path d="M18 46 L44 20 M44 20 H28 M44 20 V36" stroke="#FBF6EA" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div class="curtain curtain-r" id="curtainR">
+  <svg class="mark" viewBox="0 0 64 64" fill="none"><path d="M18 46 L44 20 M44 20 H28 M44 20 V36" stroke="#FBF6EA" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<header class="site-nav" id="siteNav">
+  <a href="#top" class="nav-brand"><span class="b1">Sebastião</span> <span class="b2">Oliveira</span></a>
+  <nav class="nav-links">
+    <a href="#trajetoria">Trajetória</a>
+    <a href="#fizemos">O que já fizemos</a>
+    <a href="#defendemos">O que defendemos</a>
+    <a href="#pernambuco">Pernambuco</a>
+    <a href="#comunidade">Comunidade</a>
+  </nav>
+  <div class="nav-actions">
+    <a href="https://www.instagram.com/sebastiaooliveirape/" target="_blank" rel="noopener" class="nav-insta" aria-label="Instagram oficial de Sebastião Oliveira">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>
+    </a>
+    <a href="#acompanhe" class="nav-cta">Acompanhar</a>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="top">
+  <span class="ghost-number">70123</span>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="hero-eyebrow"><span class="dot"></span> Pré-candidato à reeleição · Deputado Estadual </span>
+      <h1>Sebastião <span class="accent">de novo</span>, para continuar ajudando Pernambuco.</h1>
+      <p class="hero-lede">
+        Uma história que começou no Sertão, um trabalho que segue em andamento e um novo ciclo
+        que estamos construindo juntos. A força que nasce do Sertão continua a mesma.
+      </p>
+      <div class="hero-actions">
+        <a href="#trajetoria" class="btn-primary">
+          Conhecer a trajetória
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#acompanhe" class="btn-ghost">Acompanhar</a>
+      </div>
+      <div class="hero-number-badge">
+        <span class="n">70123</span>
+        <span class="label">Guarde o número. Ele representa a continuidade desse trabalho por Pernambuco.</span>
+      </div>
+      <p class="hero-updated" id="heroUpdated"><!-- preenchido via JS com a data real --></p>
+    </div>
+    <div class="hero-photo">
+      <div class="hero-photo-frame">
+        <img src="assets/seba-hero.jpg" alt="Sebastião Oliveira, pré-candidato à reeleição para Deputado Estadual">
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    Role para conhecer
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 6l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<!-- FAIXA MOSAICO SERTANEJO -->
+<div class="mosaic-band" id="mosaicBand1"></div>
+
+<!-- ============================================================
+     TRAJETÓRIA
+     ============================================================ -->
+<section class="section" id="trajetoria">
+  <div class="container">
+    <div class="trajetoria-grid">
+      <div>
+        <span class="eyebrow">Quem é Sebastião</span>
+        <h2 style="font-size:clamp(1.9rem,3.4vw,2.5rem); margin-bottom:26px;">Uma história construída no chão do Sertão.</h2>
+        <div class="timeline">
+          <div class="t-item">
+            <span class="t-year">A definir</span>
+            <h3 class="t-title">Marco a inserir</h3>
+            <p class="t-body text-placeholder" style="max-width:100%;">Espaço reservado para um marco real da trajetória de Sebastião (ano, cargo ou acontecimento).</p>
+          </div>
+          <div class="t-item">
+            <span class="t-year">A definir</span>
+            <h3 class="t-title">Marco a inserir</h3>
+            <p class="t-body text-placeholder" style="max-width:100%;">Espaço reservado para um marco real da trajetória de Sebastião (ano, cargo ou acontecimento).</p>
+          </div>
+          <div class="t-item">
+            <span class="t-year">A definir</span>
+            <h3 class="t-title">Marco a inserir</h3>
+            <p class="t-body text-placeholder" style="max-width:100%;">Espaço reservado para um marco real da trajetória de Sebastião (ano, cargo ou acontecimento).</p>
+          </div>
+        </div>
+      </div>
+      <div class="trajetoria-photos">
+        <div class="photo-slot">
+          <svg class="ph-icon" viewBox="0 0 24 24" fill="none"><path d="M4 8a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span class="ph-label">Foto de atuação / trajetória</span>
+        </div>
+        <div class="photo-slot">
+          <svg class="ph-icon" viewBox="0 0 24 24" fill="none"><path d="M4 8a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span class="ph-label">Foto com a comunidade</span>
+        </div>
+        <div class="photo-slot">
+          <svg class="ph-icon" viewBox="0 0 24 24" fill="none"><path d="M4 8a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span class="ph-label">Foto no Sertão</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAIXA MOSAICO SERTANEJO -->
+<div class="mosaic-band" id="mosaicBand2"></div>
+
+<!-- ============================================================
+     O QUE JÁ FIZEMOS
+     ============================================================ -->
+<section class="section section-alt" id="fizemos">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Trabalho realizado</span>
+      <h2>Trabalho que deixou marca.</h2>
+      <p>Uma pré-candidatura à reeleição carrega história e experiência. Estes espaços serão preenchidos com realizações concretas, por área de atuação.</p>
+    </div>
+    <div class="fizemos-grid">
+      <div class="feito-card">
+        <div class="photo-slot feito-photo"><span class="ph-label">Foto — Saúde</span></div>
+        <div class="feito-body">
+          <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z" stroke="#fff" stroke-width="1.6"/></svg></div>
+          <h3>Saúde</h3>
+          <div class="text-placeholder">Realizações reais na área da saúde entram aqui.</div>
+        </div>
+      </div>
+      <div class="feito-card">
+        <div class="photo-slot feito-photo"><span class="ph-label">Foto — Infraestrutura</span></div>
+        <div class="feito-body">
+          <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 21V9l8-5 8 5v12M9 21v-6h6v6" stroke="#fff" stroke-width="1.6"/></svg></div>
+          <h3>Infraestrutura</h3>
+          <div class="text-placeholder">Realizações reais na área de infraestrutura entram aqui.</div>
+        </div>
+      </div>
+      <div class="feito-card">
+        <div class="photo-slot feito-photo"><span class="ph-label">Foto — Desenvolvimento</span></div>
+        <div class="feito-body">
+          <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 18L10 8l4 6 6-10" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Desenvolvimento</h3>
+          <div class="text-placeholder">Realizações reais na área de desenvolvimento entram aqui.</div>
+        </div>
+      </div>
+      <div class="feito-card">
+        <div class="photo-slot feito-photo"><span class="ph-label">Foto — Educação</span></div>
+        <div class="feito-body">
+          <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-5 9 5-9 5-9-5z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 12v5c0 1 2 2.5 5 2.5s5-1.5 5-2.5v-5" stroke="#fff" stroke-width="1.6"/></svg></div>
+          <h3>Educação</h3>
+          <div class="text-placeholder">Realizações reais na área de educação entram aqui.</div>
+        </div>
+      </div>
+      <div class="feito-card">
+        <div class="photo-slot feito-photo"><span class="ph-label">Foto — Sertão</span></div>
+        <div class="feito-body">
+          <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.5" stroke="#fff" stroke-width="1.6"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h3>Sertão</h3>
+          <div class="text-placeholder">Realizações reais voltadas ao Sertão entram aqui.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     O QUE DEFENDEMOS
+     ============================================================ -->
+<section class="section" id="defendemos">
+  <span class="ghost-number">70123</span>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Bandeiras para um novo ciclo</span>
+      <h2>O que defendemos.</h2>
+      <p>Cada bandeira abaixo representa uma frente de atuação que será detalhada com propostas concretas para este novo ciclo.</p>
+    </div>
+  </div>
+  <div class="propostas-scroller">
+    <div class="proposta-card">
+      <div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z" stroke="#fff" stroke-width="1.8"/></svg></div>
+      <h3>Saúde</h3>
+      <div class="text-placeholder">Propostas reais para a área da saúde entram aqui.</div>
+    </div>
+    <div class="proposta-card">
+      <div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-5 9 5-9 5-9-5z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+      <h3>Educação</h3>
+      <div class="text-placeholder">Propostas reais para a área da educação entram aqui.</div>
+    </div>
+    <div class="proposta-card">
+      <div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 21V9l8-5 8 5v12" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <h3>Infraestrutura</h3>
+      <div class="text-placeholder">Propostas reais para infraestrutura entram aqui.</div>
+    </div>
+    <div class="proposta-card">
+      <div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 18L10 8l4 6 6-10" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Desenvolvimento regional</h3>
+      <div class="text-placeholder">Propostas reais para o desenvolvimento regional entram aqui.</div>
+    </div>
+    <div class="proposta-card">
+      <div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M5 8h14M5 16h14" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <h3>Emprego e renda</h3>
+      <div class="text-placeholder">Propostas reais para emprego e renda entram aqui.</div>
+    </div>
+    <div class="proposta-card">
+      <div class="p-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.5" stroke="#fff" stroke-width="1.8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <h3>Desenvolvimento do Sertão</h3>
+      <div class="text-placeholder">Propostas reais para o Sertão entram aqui.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PERNAMBUCO
+     ============================================================ -->
+<section class="section section-alt" id="pernambuco">
+  <div class="container">
+    <div class="pe-grid">
+      <div class="pe-map-wrap">
+        <!-- Representação estilizada e não-cartográfica de Pernambuco -->
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mapa estilizado de Pernambuco">
+          <path d="M40 60 L180 40 L200 70 L260 80 L270 110 L230 140 L250 190 L200 230 L150 220 L120 260 L70 240 L60 190 L30 160 L50 110 Z"
+                fill="var(--terracota-soft)" stroke="var(--terracota)" stroke-width="3" stroke-linejoin="round"/>
+          <circle cx="150" cy="150" r="6" fill="var(--terracota)"/>
+        </svg>
+      </div>
+      <div>
+        <span class="eyebrow">Presença territorial</span>
+        <h2 style="font-size:clamp(1.9rem,3.4vw,2.5rem); margin-bottom:20px;">Do Sertão para todo Pernambuco.</h2>
+        <p style="color:var(--ink-soft); max-width:520px; margin-bottom:30px;">
+          A trajetória de Sebastião nasce no Sertão, mas caminha ao lado de todo o povo pernambucano.
+          Este espaço será atualizado com regiões e municípios de atuação.
+        </p>
+        <div class="pe-regioes">
+          <div class="pe-regiao-slot">Região a definir</div>
+          <div class="pe-regiao-slot">Região a definir</div>
+          <div class="pe-regiao-slot">Região a definir</div>
+          <div class="pe-regiao-slot">Região a definir</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAIXA MOSAICO SERTANEJO -->
+<div class="mosaic-band" id="mosaicBand3"></div>
+
+<!-- ============================================================
+     COMUNIDADE
+     ============================================================ -->
+<section class="section" id="comunidade">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Perto da gente</span>
+      <h2>Perto de quem mais precisa.</h2>
+      <p>Espaço reservado para fotos reais que mostrem proximidade com a população — reuniões, feiras, visitas e o dia a dia da pré-candidatura.</p>
+    </div>
+    <div class="comunidade-grid">
+      <div class="photo-slot"><span class="ph-label">Comunidade</span></div>
+      <div class="photo-slot"><span class="ph-label">Retrato</span></div>
+      <div class="photo-slot"><span class="ph-label">Sertão</span></div>
+      <div class="photo-slot"><span class="ph-label">Evento</span></div>
+      <div class="photo-slot"><span class="ph-label">Conversa</span></div>
+      <div class="photo-slot"><span class="ph-label">Trajetória</span></div>
+    </div>
+    <div class="comunidade-social">
+      <a href="https://www.instagram.com/sebastiaooliveirape/" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>
+        Siga no Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     UM NOVO CICLO / CONTADOR
+     ============================================================ -->
+<section class="section" id="ciclo">
+  <div class="container">
+    <div class="ciclo">
+      <span class="ghost-number">70123</span>
+      <div class="ciclo-inner">
+        <span class="eyebrow">Novo ciclo</span>
+        <h2>Um novo ciclo está começando.</h2>
+        <p>Sebastião de novo, para continuar ajudando o povo pernambucano. Acompanhe quantas pessoas já se cadastraram para seguir esse caminho.</p>
+        <div class="ciclo-counter">
+          <span class="count-number" id="supporterCountValue">—</span>
+          <span class="count-label" id="supporterCountLabel">Acompanhe o crescimento deste novo ciclo</span>
+        </div>
+        <div class="ciclo-progress-track"><div class="ciclo-progress-fill" id="supporterProgressFill"></div></div>
+        <p class="ciclo-note">O número 70123 é o número eleitoral do candidato e nunca representa a quantidade de cadastros.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     AGENDA / ATUALIZAÇÕES
+     ============================================================ -->
+<section class="section section-alt" id="agenda">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Fique por dentro</span>
+      <h2>Acompanhe o caminho.</h2>
+      <p>Espaço reservado para notícias, agenda e atualizações reais da pré-candidatura. Os itens abaixo são exemplos de estrutura, não eventos reais.</p>
+    </div>
+    <div class="agenda-grid">
+      <div class="agenda-card">
+        <div class="photo-slot agenda-photo"><span class="ph-label">Imagem a inserir</span></div>
+        <div class="agenda-body">
+          <span class="agenda-date">Data a definir</span>
+          <h3>Título a inserir</h3>
+          <p>Resumo curto do conteúdo real a ser publicado aqui.</p>
+          <a href="#" class="agenda-link">Ler mais →</a>
+        </div>
+      </div>
+      <div class="agenda-card">
+        <div class="photo-slot agenda-photo"><span class="ph-label">Imagem a inserir</span></div>
+        <div class="agenda-body">
+          <span class="agenda-date">Data a definir</span>
+          <h3>Título a inserir</h3>
+          <p>Resumo curto do conteúdo real a ser publicado aqui.</p>
+          <a href="#" class="agenda-link">Ler mais →</a>
+        </div>
+      </div>
+      <div class="agenda-card">
+        <div class="photo-slot agenda-photo"><span class="ph-label">Imagem a inserir</span></div>
+        <div class="agenda-body">
+          <span class="agenda-date">Data a definir</span>
+          <h3>Título a inserir</h3>
+          <p>Resumo curto do conteúdo real a ser publicado aqui.</p>
+          <a href="#" class="agenda-link">Ler mais →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ACOMPANHE
+     ============================================================ -->
+<section class="section" id="acompanhe">
+  <div class="container">
+    <div class="apoie">
+      <span class="ghost-number">70123</span>
+      <div class="apoie-inner">
+        <div>
+          <span class="eyebrow">Acompanhe</span>
+          <h2>Acompanhe os próximos passos.</h2>
+          <p>Deixe seus dados para receber informações sobre a trajetória, os próximos passos e as atividades desta pré-candidatura.</p>
+        </div>
+        <form class="apoie-form" id="apoieForm">
+          <div class="form-row">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" placeholder="Seu nome" required>
+          </div>
+          <div class="form-row">
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" placeholder="Sua cidade" required>
+          </div>
+          <div class="form-row">
+            <label for="whatsapp">WhatsApp</label>
+            <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
+          </div>
+          <div class="form-consent">
+            <input type="checkbox" id="consent" required>
+            <label for="consent">Autorizo o uso dos meus dados exclusivamente para contato sobre esta pré-candidatura, conforme a LGPD.</label>
+          </div>
+          <button type="submit" class="btn-primary form-submit">Acompanhar</button>
+          <p class="form-status" id="formStatus" aria-live="polite"></p>
+          <p class="form-note">Seus dados estão protegidos.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><span class="b1">Sebastião</span> <span class="b2">Oliveira</span></div>
+        <p class="footer-tagline">A força que nasce do Sertão. Pré-candidato à reeleição para Deputado Estadual — número 70123.</p>
+        <p class="footer-tagline" id="footerUpdated" style="margin-top:10px; opacity:0.7; font-size:12px;"><!-- preenchido via JS com a data real --></p>
+        <div class="social-row">
+          <a href="https://www.instagram.com/sebastiaooliveirape/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#trajetoria">Trajetória</a></li>
+          <li><a href="#fizemos">O que já fizemos</a></li>
+          <li><a href="#defendemos">O que defendemos</a></li>
+          <li><a href="#pernambuco">Pernambuco</a></li>
+          <li><a href="#comunidade">Comunidade</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="#">contato@sebastiaooliveira.com.br</a></li>
+          <li><a href="#acompanhe">Fale com a equipe</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="legal-box">
+      <strong>Aviso legal:</strong> Este site é material de pré-candidatura à reeleição, em conformidade com a legislação
+      eleitoral vigente. É vedado o pedido explícito de voto antes de 16 de agosto de 2026, data em que a propaganda
+      eleitoral passa a ser oficialmente permitida (Resolução TSE nº 23.610/2019 e atualizações). Esta pré-candidatura
+      ainda não constitui registro oficial de candidatura. Conteúdo sujeito a alterações conforme orientação jurídica
+      da campanha.
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Sebastião Oliveira. Todos os direitos reservados.</span>
+      <span>Pré-candidatura à reeleição · Deputado Estadual · 70123</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+/* ============================================================
+   CONFIG — editar aqui para reaproveitar o template
+   em outro pré-candidato (nome, número, slogan, cores)
+   ============================================================ */
+const CONFIG = {
+  primeiroNome: "SEBASTIÃO",
+  sobrenome: "OLIVEIRA",
+  cargo: "Deputado Estadual",
+  numero: "70123",
+  slogan: "A força que nasce do Sertão."
+};
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Ícones do mosaico sertanejo ---------- */
+const MOSAIC_ICONS = [
+  '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><g stroke-width="2"><line x1="12" y1="1.5" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22.5" y2="12"/><line x1="4.4" y1="4.4" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.6" y2="19.6"/><line x1="4.4" y1="19.6" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.6" y2="4.4"/></g></svg>',
+  '<svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke-linecap="round"><path d="M12 22V13M12 13c0-3 2-3 2-6s-2-3-2-6M12 13c0-3-2-3-2-6s2-3 2-6"/><path d="M12 17c1.8 0 3-1 3-2M12 15c-1.8 0-3-.8-3-2"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V9l6-4 6 4v13"/><path d="M10 22v-6h4v6"/><path d="M12 5V2M10.5 3.2h3"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><path d="M3 20c4-9 5-15 9-15s5 6 9 15" stroke-dasharray="0.2 4"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linejoin="round"><path d="M3 8l4-2 3 2 3-2 3 2 4-2v9l-4 2-3-2-3 2-3-2-4 2z"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19c2-8 3-14 8-14s6 6 8 14"/><circle cx="12" cy="9" r="2.2"/></svg>'
+];
+function buildMosaicBand(el, count){
+  if(!el) return;
+  let html = '';
+  for(let i=0;i<count;i++){
+    html += '<div class="mosaic-tile">' + MOSAIC_ICONS[i % MOSAIC_ICONS.length] + '</div>';
+  }
+  el.innerHTML = html;
+}
+buildMosaicBand(document.getElementById('mosaicBand1'), 18);
+buildMosaicBand(document.getElementById('mosaicBand2'), 18);
+buildMosaicBand(document.getElementById('mosaicBand3'), 18);
+
+/* ---------- Monta o preloader a partir do CONFIG ---------- */
+document.getElementById('preLine1').textContent = CONFIG.primeiroNome;
+document.getElementById('preLine2').textContent = CONFIG.sobrenome;
+
+/* ============================================================
+   DATA REAL — gerada dinamicamente pelo navegador (pt-BR)
+   ============================================================ */
+function formatarDataAtual(){
+  const hoje = new Date();
+  const formatado = hoje.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  return 'Atualizado em ' + formatado;
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const texto = formatarDataAtual();
+  const heroUpdated = document.getElementById('heroUpdated');
+  const footerUpdated = document.getElementById('footerUpdated');
+  if(heroUpdated) heroUpdated.textContent = texto;
+  if(footerUpdated) footerUpdated.textContent = texto;
+});
+
+/* ============================================================
+   CONTADOR REAL DE APOIADORES
+   ------------------------------------------------------------
+   ATENÇÃO — INTEGRAÇÃO PENDENTE:
+   Este projeto ainda não possui banco de dados/backend conectado
+   (ex.: Netlify Functions, Netlify Blobs, Supabase, Firebase, CRM
+   ou planilha). getSupporterCount() é o ÚNICO ponto que deve ser
+   alterado quando essa integração real for implementada — ele
+   deve passar a retornar { count, goal } vindos da fonte real.
+   Enquanto isso não acontecer, NUNCA exibir número fictício.
+   ============================================================ */
+async function getSupporterCount(){
+  /* TODO INTEGRAÇÃO: substituir por chamada real, por exemplo:
+     const res = await fetch('/.netlify/functions/supporter-count');
+     const data = await res.json();
+     return { count: data.count, goal: data.goal };
+  */
+  return null; // null = fonte de dados ainda não conectada
+}
+
+async function renderSupporterCounter(){
+  const valueEl = document.getElementById('supporterCountValue');
+  const labelEl = document.getElementById('supporterCountLabel');
+  const fillEl = document.getElementById('supporterProgressFill');
+  if(!valueEl) return;
+
+  const data = await getSupporterCount();
+
+  if(data && typeof data.count === 'number'){
+    valueEl.textContent = data.count.toLocaleString('pt-BR');
+    labelEl.textContent = 'pessoas já acompanham esse novo ciclo';
+    if(fillEl && data.goal){
+      const pct = Math.min(100, Math.round((data.count / data.goal) * 100));
+      fillEl.style.width = pct + '%';
+    }
+  } else {
+    valueEl.textContent = '—';
+    labelEl.textContent = 'Acompanhe o crescimento deste novo ciclo';
+    if(fillEl) fillEl.style.width = '0%';
+  }
+}
+renderSupporterCounter();
+
+/* ---------- Sequência de intro (uma única vez por sessão) ---------- */
+const INTRO_SESSION_KEY = 'sebastiaoIntroShown';
+
+function skipIntro(){
+  document.getElementById('preloader').style.display = 'none';
+  document.getElementById('curtainL').style.display = 'none';
+  document.getElementById('curtainR').style.display = 'none';
+  document.getElementById('siteNav').classList.add('visible');
+  revealAll();
+}
+
+function runIntro(){
+  if(reduceMotion || sessionStorage.getItem(INTRO_SESSION_KEY)){
+    skipIntro();
+    return;
+  }
+  sessionStorage.setItem(INTRO_SESSION_KEY, '1');
+
+  const tl = gsap.timeline();
+
+  tl.to('#preEyebrow', { opacity: 1, duration: 0.5, ease: 'sine.out' })
+    .to('#preLine1', {
+      opacity: 1, filter: 'blur(0px)', scale: 1, duration: 1.0, ease: 'sine.out'
+    }, '+=0.1')
+    .to('#preLine2', {
+      opacity: 1, filter: 'blur(0px)', scale: 1, duration: 1.0, ease: 'sine.out'
+    }, '-=0.5')
+    .to('#preSymbolRow', { opacity: 1, duration: 0.6, ease: 'sine.out' }, '+=0.2')
+    .to({ val: 0 }, {
+      val: parseInt(CONFIG.numero, 10),
+      duration: 0.7,
+      ease: 'power2.out',
+      onUpdate: function(){
+        document.getElementById('preNumber').textContent =
+          Math.floor(this.targets()[0].val).toString().padStart(CONFIG.numero.length, '0');
+      }
+    }, '-=0.3')
+    .to('#preSlogan', { opacity: 1, duration: 0.6, ease: 'sine.out' }, '-=0.1')
+    .to('#preBarTrack', { opacity: 1, duration: 0.3 }, '-=0.9')
+    .to('#preBarFill', { width: '100%', duration: 0.9, ease: 'power1.inOut' }, '-=0.9')
+    .to('#preloader', { opacity: 0, duration: 0.4 }, '+=0.3')
+    .set('#preloader', { display: 'none' })
+    .to(['#curtainL'], { xPercent: -100, duration: 0.9, ease: 'power4.inOut' }, '<')
+    .to(['#curtainR'], { xPercent: 100, duration: 0.9, ease: 'power4.inOut' }, '<')
+    .set(['#curtainL', '#curtainR'], { display: 'none' })
+    .add(() => { document.getElementById('siteNav').classList.add('visible'); revealAll(); }, '-=0.5');
+}
+
+/* ---------- Nav scroll state ---------- */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('siteNav');
+  if(window.scrollY > 60) nav.classList.add('solid'); else nav.classList.remove('solid');
+});
+
+/* ---------- Scroll progress bar ---------- */
+function initProgress(){
+  gsap.to('#progressBar', {
+    scaleX: 1,
+    ease: 'none',
+    scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.3 }
+  });
+}
+
+/* ---------- Reveals ---------- */
+function revealAll(){
+  if(reduceMotion){
+    document.querySelectorAll('.t-item, .proposta-card, .feito-card, .agenda-card').forEach(el=>{
+      el.style.opacity = 1; el.style.transform = 'none';
+    });
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+  initProgress();
+
+  gsap.utils.toArray('.t-item').forEach(item => {
+    gsap.to(item, {
+      opacity: 1, x: 0, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: item, start: 'top 85%' }
+    });
+  });
+
+  gsap.utils.toArray('.feito-card').forEach((item, i) => {
+    gsap.to(item, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: i * 0.05,
+      scrollTrigger: { trigger: item, start: 'top 90%' }
+    });
+  });
+
+  gsap.utils.toArray('.proposta-card').forEach((item, i) => {
+    gsap.to(item, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: i * 0.05,
+      scrollTrigger: { trigger: item, start: 'top 90%' }
+    });
+  });
+
+  gsap.utils.toArray('.agenda-card').forEach((item, i) => {
+    gsap.to(item, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', delay: i * 0.05,
+      scrollTrigger: { trigger: item, start: 'top 92%' }
+    });
+  });
+
+  gsap.utils.toArray('.comunidade-grid .photo-slot').forEach((item, i) => {
+    gsap.from(item, {
+      opacity: 0, scale: 0.94, duration: 0.6, ease: 'power2.out', delay: i * 0.04,
+      scrollTrigger: { trigger: item, start: 'top 92%' }
+    });
+  });
+}
+
+/* ============================================================
+   FORMULÁRIO "ACOMPANHE"
+   ------------------------------------------------------------
+   ATENÇÃO — INTEGRAÇÃO PENDENTE:
+   Não há backend/banco de dados conectado a este projeto ainda.
+   submitSupporter() é o ÚNICO ponto que deve ser alterado quando
+   uma integração real (Netlify Functions, Netlify Blobs, Supabase,
+   Firebase, CRM ou planilha) estiver disponível. Até lá, os dados
+   do formulário NÃO são armazenados em nenhum lugar — apenas a
+   interface é exibida, de forma transparente ao usuário.
+   ============================================================ */
+async function submitSupporter(payload){
+  /* TODO INTEGRAÇÃO: substituir por envio real, por exemplo:
+     const res = await fetch('/.netlify/functions/submit-supporter', {
+       method: 'POST', body: JSON.stringify(payload)
+     });
+     return res.ok;
+  */
+  return { integrated: false };
+}
+
+document.getElementById('apoieForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const statusEl = document.getElementById('formStatus');
+  const payload = {
+    nome: document.getElementById('nome').value,
+    cidade: document.getElementById('cidade').value,
+    whatsapp: document.getElementById('whatsapp').value
+  };
+  const result = await submitSupporter(payload);
+  if(result && result.integrated){
+    statusEl.textContent = 'Cadastro recebido — obrigado por acompanhar!';
+    this.reset();
+  } else {
+    statusEl.textContent = 'A integração para armazenar seu cadastro ainda está em preparação. Seus dados não foram enviados.';
+  }
+});
+
+window.addEventListener('load', runIntro);
+</script>
+</body>
+</html>
