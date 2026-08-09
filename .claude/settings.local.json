@@ -17,7 +17,8 @@
       "Bash(py --version)",
       "Bash(where node *)",
       "Bash(find \"/c/Users/Clawb/Downloads/drive-download-20260808T200739Z-1-001\" -maxdepth 3 -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.png\" 2>/dev/null | head -60)",
-      "Bash(unzip -l \"drive-download-20260808T200739Z-1-001.zip\")"
+      "Bash(unzip -l \"drive-download-20260808T200739Z-1-001.zip\")",
+      "WebFetch(domain:pt.wikipedia.org)"
     ]
   }
 }
