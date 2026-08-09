@@ -346,9 +346,42 @@ header.site-nav.solid{ background:rgba(246,238,220,0.92); backdrop-filter:blur(1
 .t-body{ color:var(--ink-soft); max-width:560px; font-size:0.98rem; }
 
 .trajetoria-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; }
-.trajetoria-photos{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-.trajetoria-photos .photo-slot:first-child{ grid-column:1/-1; aspect-ratio:16/10; }
+
+/* Fallback estático (grade) usado quando prefers-reduced-motion está ativo */
+.trajetoria-photos{ display:none; grid-template-columns:1fr 1fr; gap:16px; }
+.trajetoria-photos.is-visible{ display:grid; }
 .trajetoria-photos .photo-slot{ aspect-ratio:1/1; }
+
+/* ============================================================
+   CARROSSEL — "Quem é Sebastião" (autoplay, setas, dots)
+   ============================================================ */
+.trajetoria-carousel{
+  position:relative; aspect-ratio:16/11; border-radius:18px; overflow:hidden;
+  opacity:0; transform:translateY(30px);
+}
+.carousel-track{ display:flex; height:100%; width:100%; transition:transform 0.6s cubic-bezier(.65,0,.35,1); }
+.carousel-slide{ flex:0 0 100%; height:100%; }
+.carousel-slide .photo-slot{ height:100%; border-radius:0; }
+.carousel-arrow{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+  width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:var(--surface); border:1.5px solid var(--line); color:var(--ink);
+  transition:border-color 0.2s ease, background 0.2s ease;
+}
+.carousel-arrow:hover{ border-color:var(--terracota); background:var(--terracota-soft); }
+.carousel-arrow.prev{ left:12px; }
+.carousel-arrow.next{ right:12px; }
+.carousel-dots{
+  position:absolute; bottom:14px; left:50%; transform:translateX(-50%); z-index:3;
+  display:flex; gap:8px;
+}
+.carousel-dot{
+  width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.55);
+  border:1.5px solid rgba(43,32,19,0.25); transition:background 0.2s ease, transform 0.2s ease;
+}
+.carousel-dot[aria-current="true"]{ background:var(--terracota); border-color:var(--terracota); transform:scale(1.15); }
+/* Enquanto prefers-reduced-motion estiver ativo, o JS troca para a grade estática acima */
+.trajetoria-carousel.is-hidden{ display:none; }
 
 /* ============================================================
    O QUE JÁ FIZEMOS
@@ -368,6 +401,25 @@ header.site-nav.solid{ background:rgba(246,238,220,0.92); backdrop-filter:blur(1
   display:flex; align-items:center; justify-content:center; background:var(--verde);
 }
 .feito-card:nth-child(2) .f-icon{ background:var(--terracota); }
+
+/* ============================================================
+   MOMENTO — clipe decorativo em loop (mudo, tipo GIF)
+   ============================================================ */
+.loop-video-wrap{
+  --momento-ratio: 16/9;
+  position:relative; max-width:760px; margin:0 auto; aspect-ratio:var(--momento-ratio);
+  border-radius:20px; overflow:hidden; opacity:0; transform:translateY(30px);
+  box-shadow:0 20px 44px -22px rgba(43,32,19,0.28);
+}
+.loop-video-wrap .photo-slot{ height:100%; border-radius:20px; }
+.loop-video{ width:100%; height:100%; object-fit:cover; display:block; }
+.loop-video-play{
+  position:absolute; inset:0; margin:auto; width:64px; height:64px; border-radius:50%; z-index:3;
+  background:rgba(43,32,19,0.55); backdrop-filter:blur(2px);
+  display:flex; align-items:center; justify-content:center; color:#fff;
+  transition:background 0.2s ease, transform 0.2s ease;
+}
+.loop-video-play:hover{ background:rgba(43,32,19,0.72); transform:scale(1.05); }
 .feito-card:nth-child(3) .f-icon{ background:var(--ouro); }
 .feito-card:nth-child(4) .f-icon{ background:var(--verde-dim); }
 .feito-card:nth-child(5) .f-icon{ background:var(--terracota-dim); }
@@ -692,18 +744,52 @@ footer a{ color:var(--creme); }
           </div>
         </div>
       </div>
-      <div class="trajetoria-photos">
+      <!-- Carrossel autoplay — pausa no hover/touch; substituído por grade estática se prefers-reduced-motion -->
+      <div class="trajetoria-carousel" id="trajetoriaCarousel" role="region" aria-roledescription="carrossel" aria-label="Fotos da trajetória de Sebastião Oliveira">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <div class="photo-slot">
+              <img src="assets/trajetoria-1.jpg" alt="Sebastião Oliveira em evento de campanha do Avante-PE">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="photo-slot">
+              <img src="assets/trajetoria-2.jpg" alt="Sebastião Oliveira em manifestação cultural pernambucana, com bonecos gigantes de maracatu">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="photo-slot">
+              <img src="assets/trajetoria-3.jpg" alt="Sebastião Oliveira abraçando apoiadora em evento ao ar livre">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="photo-slot">
+              <img src="assets/trajetoria-4.jpg" alt="Sebastião Oliveira cumprimentando apoiadores em evento do Avante-PE">
+            </div>
+          </div>
+        </div>
+        <button type="button" class="carousel-arrow prev" id="carouselPrev" aria-label="Foto anterior">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="carousel-arrow next" id="carouselNext" aria-label="Próxima foto">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+
+      <!-- Fallback estático — exibido só quando prefers-reduced-motion está ativo (ver revealAll/initCarousel no JS) -->
+      <div class="trajetoria-photos" id="trajetoriaPhotosStatic">
         <div class="photo-slot">
-          <svg class="ph-icon" viewBox="0 0 24 24" fill="none"><path d="M4 8a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg>
-          <span class="ph-label">Foto de atuação / trajetória</span>
+          <img src="assets/trajetoria-1.jpg" alt="Sebastião Oliveira em evento de campanha do Avante-PE">
         </div>
         <div class="photo-slot">
-          <svg class="ph-icon" viewBox="0 0 24 24" fill="none"><path d="M4 8a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg>
-          <span class="ph-label">Foto com a comunidade</span>
+          <img src="assets/trajetoria-2.jpg" alt="Sebastião Oliveira em manifestação cultural pernambucana, com bonecos gigantes de maracatu">
         </div>
         <div class="photo-slot">
-          <svg class="ph-icon" viewBox="0 0 24 24" fill="none"><path d="M4 8a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg>
-          <span class="ph-label">Foto no Sertão</span>
+          <img src="assets/trajetoria-3.jpg" alt="Sebastião Oliveira abraçando apoiadora em evento ao ar livre">
+        </div>
+        <div class="photo-slot">
+          <img src="assets/trajetoria-4.jpg" alt="Sebastião Oliveira cumprimentando apoiadores em evento do Avante-PE">
         </div>
       </div>
     </div>
@@ -763,6 +849,31 @@ footer a{ color:var(--creme); }
           <h3>Sertão</h3>
           <div class="text-placeholder">Realizações reais voltadas ao Sertão entram aqui.</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MOMENTO — clipe decorativo em loop (mudo, tipo GIF)
+     ============================================================ -->
+<section class="section" id="momento">
+  <div class="container">
+    <div class="section-head" style="text-align:center; margin-left:auto; margin-right:auto;">
+      <span class="eyebrow">Bastidores</span>
+      <h2>Um momento desse novo ciclo.</h2>
+    </div>
+
+    <!-- SUBSTITUIR: assets/momento-loop.mp4 e .webm — clipe de 5-10s,
+    mudo, comprimido (recomendado: abaixo de 3-4MB, resolução máxima
+    1280px de largura). Vídeo pesado aqui derruba a performance da
+    página inteira. Ferramentas simples para comprimir: HandBrake
+    (gratuito), ou:
+    ffmpeg -i original.mp4 -vf scale=1280:-1 -crf 28 -an momento-loop.mp4 -->
+    <div class="loop-video-wrap" id="loopVideoWrap">
+      <div class="photo-slot" id="loopVideoPlaceholder">
+        <svg class="ph-icon" viewBox="0 0 24 24" fill="none"><path d="M4 8a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span class="ph-label">Clipe a inserir — vídeo em loop, sem áudio, 5-10s</span>
       </div>
     </div>
   </div>
@@ -1125,6 +1236,154 @@ async function renderSupporterCounter(){
 }
 renderSupporterCounter();
 
+/* ============================================================
+   CARROSSEL — "Quem é Sebastião"
+   ------------------------------------------------------------
+   Autoplay a cada ~4.5s, pausa no hover/touch, setas + dots manuais.
+   Se prefers-reduced-motion estiver ativo, o carrossel nem é montado:
+   a grade estática (.trajetoria-photos) é exibida no lugar.
+   ============================================================ */
+function initCarousel(){
+  const carousel = document.getElementById('trajetoriaCarousel');
+  const staticGrid = document.getElementById('trajetoriaPhotosStatic');
+  if(!carousel || !staticGrid) return;
+
+  if(reduceMotion){
+    carousel.classList.add('is-hidden');
+    staticGrid.classList.add('is-visible');
+    return;
+  }
+
+  const track = document.getElementById('carouselTrack');
+  const slides = Array.from(track.children);
+  const dotsWrap = document.getElementById('carouselDots');
+  const prevBtn = document.getElementById('carouselPrev');
+  const nextBtn = document.getElementById('carouselNext');
+  const AUTOPLAY_MS = 4500;
+  let current = 0;
+  let timer = null;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'carousel-dot';
+    dot.setAttribute('aria-label', 'Ir para foto ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i, true));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function render(){
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach((d, i) => d.setAttribute('aria-current', i === current ? 'true' : 'false'));
+  }
+
+  function goTo(index, userAction){
+    current = (index + slides.length) % slides.length;
+    render();
+    if(userAction) restartAutoplay();
+  }
+
+  function next(userAction){ goTo(current + 1, userAction); }
+  function prev(userAction){ goTo(current - 1, userAction); }
+
+  function startAutoplay(){ timer = setInterval(next, AUTOPLAY_MS); }
+  function stopAutoplay(){ if(timer){ clearInterval(timer); timer = null; } }
+  function restartAutoplay(){ stopAutoplay(); startAutoplay(); }
+
+  prevBtn.addEventListener('click', () => prev(true));
+  nextBtn.addEventListener('click', () => next(true));
+  carousel.addEventListener('mouseenter', stopAutoplay);
+  carousel.addEventListener('mouseleave', startAutoplay);
+  carousel.addEventListener('touchstart', stopAutoplay, { passive: true });
+  carousel.addEventListener('touchend', startAutoplay, { passive: true });
+
+  render();
+  startAutoplay();
+}
+initCarousel();
+
+/* ============================================================
+   MOMENTO — clipe decorativo em loop (vídeo mudo, tipo GIF)
+   ------------------------------------------------------------
+   O <video> só é criado quando a seção entra na viewport, e só
+   quando assets/momento-loop.mp4 realmente existir (checado via
+   fetch HEAD) — enquanto o arquivo não chegar, o placeholder
+   .photo-slot permanece, sem <video> quebrado na página.
+   ============================================================ */
+function buildLoopVideoEl(){
+  const video = document.createElement('video');
+  video.className = 'loop-video';
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.preload = 'none';
+  video.poster = 'assets/momento-poster.jpg';
+  video.setAttribute('aria-label', 'Sebastião Oliveira em campo, vídeo decorativo sem áudio');
+  const srcWebm = document.createElement('source');
+  srcWebm.src = 'assets/momento-loop.webm'; srcWebm.type = 'video/webm';
+  const srcMp4 = document.createElement('source');
+  srcMp4.src = 'assets/momento-loop.mp4'; srcMp4.type = 'video/mp4';
+  video.appendChild(srcWebm);
+  video.appendChild(srcMp4);
+  return video;
+}
+
+function addLoopVideoPlayButton(wrap, video){
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'loop-video-play';
+  btn.setAttribute('aria-label', 'Reproduzir vídeo');
+  btn.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  btn.addEventListener('click', () => {
+    video.play();
+    btn.remove();
+  });
+  wrap.appendChild(btn);
+}
+
+function initLoopVideo(){
+  const wrap = document.getElementById('loopVideoWrap');
+  if(!wrap) return;
+
+  function tryLoadRealVideo(){
+    /* TODO INTEGRAÇÃO: quando assets/momento-loop.mp4 existir de fato,
+       este fetch HEAD encontra o arquivo e troca o placeholder pelo
+       <video> real automaticamente — nenhuma outra alteração necessária. */
+    fetch('assets/momento-loop.mp4', { method: 'HEAD' })
+      .then(res => {
+        if(!res.ok) throw new Error('momento-loop.mp4 ainda não existe');
+        const video = buildLoopVideoEl();
+        video.addEventListener('loadeddata', () => {
+          wrap.innerHTML = '';
+          wrap.appendChild(video);
+          if(reduceMotion){
+            addLoopVideoPlayButton(wrap, video);
+          } else {
+            video.play().catch(() => { addLoopVideoPlayButton(wrap, video); });
+          }
+        });
+        video.load();
+      })
+      .catch(() => { /* mantém o placeholder — arquivo ainda não disponível */ });
+  }
+
+  if('IntersectionObserver' in window){
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          tryLoadRealVideo();
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: '200px' });
+    observer.observe(wrap);
+  } else {
+    tryLoadRealVideo();
+  }
+}
+initLoopVideo();
+
 /* ---------- Sequência de intro (uma única vez por sessão) ---------- */
 const INTRO_SESSION_KEY = 'sebastiaoIntroShown';
 
@@ -1188,7 +1447,7 @@ function initProgress(){
 /* ---------- Reveals ---------- */
 function revealAll(){
   if(reduceMotion){
-    document.querySelectorAll('.t-item, .proposta-card, .feito-card, .agenda-card').forEach(el=>{
+    document.querySelectorAll('.t-item, .proposta-card, .feito-card, .agenda-card, .loop-video-wrap').forEach(el=>{
       el.style.opacity = 1; el.style.transform = 'none';
     });
     return;
@@ -1229,6 +1488,20 @@ function revealAll(){
     gsap.from(item, {
       opacity: 0, scale: 0.94, duration: 0.6, ease: 'power2.out', delay: i * 0.04,
       scrollTrigger: { trigger: item, start: 'top 92%' }
+    });
+  });
+
+  gsap.utils.toArray('.trajetoria-carousel').forEach(item => {
+    gsap.to(item, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: item, start: 'top 85%' }
+    });
+  });
+
+  gsap.utils.toArray('.loop-video-wrap').forEach(item => {
+    gsap.to(item, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: item, start: 'top 85%' }
     });
   });
 }
