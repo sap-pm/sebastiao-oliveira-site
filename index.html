@@ -10,7 +10,7 @@
      OPEN GRAPH / COMPARTILHAMENTO (WhatsApp, Instagram, etc.)
      ============================================================ -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sebastião Oliveira — 70123 | Clawber de novo, pela continuidade de Pernambuco">
+<meta property="og:title" content="Sebastião Oliveira — 70123 | Sebastião de novo, pela continuidade de Pernambuco">
 <meta property="og:description" content="Pré-candidatura à reeleição de Sebastião Oliveira a Deputado Estadual. Trajetória, trabalho e compromisso com Pernambuco.">
 <meta property="og:image" content="assets/og-image.png">
 <meta name="theme-color" content="#F6EEDC">
@@ -118,13 +118,12 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:800; line-height:1.06;
   color:var(--ink-soft); margin-bottom:18px; opacity:0;
 }
 .pre-name{
-  font-family:var(--font-display); font-weight:800;
-  font-size:clamp(2.2rem, 8vw, 5.4rem);
-  text-align:center; line-height:1.04;
+  display:flex; justify-content:center;
 }
-.pre-name .line{ display:block; opacity:0; filter:blur(16px); transform:scale(1.045); will-change:opacity,filter,transform; }
-.pre-name .l1{ color:var(--terracota); }
-.pre-name .l2{ color:var(--verde); }
+.pre-name-logo{
+  height:clamp(64px, 11vw, 130px); width:auto;
+  opacity:0; filter:blur(16px); transform:scale(1.045); will-change:opacity,filter,transform;
+}
 .pre-symbol-row{
   margin-top:32px; display:flex; align-items:center; gap:20px; opacity:0;
 }
@@ -176,9 +175,8 @@ header.site-nav{
 }
 header.site-nav.visible{ transform:translateY(0); transition:transform 0.6s cubic-bezier(.16,.84,.44,1); }
 header.site-nav.solid{ background:rgba(246,238,220,0.92); backdrop-filter:blur(10px); box-shadow:0 1px 0 var(--line); }
-.nav-brand{ display:flex; align-items:center; gap:8px; font-family:var(--font-display); font-weight:800; font-size:1.15rem; }
-.nav-brand .b1{ color:var(--terracota); }
-.nav-brand .b2{ color:var(--verde-dim); }
+.nav-brand{ display:flex; align-items:center; gap:8px; }
+.nav-brand-logo{ height:34px; width:auto; display:block; }
 .nav-links{ display:flex; gap:30px; font-size:14px; font-weight:700; }
 .nav-links a{ opacity:0.78; position:relative; transition:opacity 0.2s ease; }
 .nav-links a:hover{ opacity:1; }
@@ -586,8 +584,7 @@ footer a{ color:var(--creme); }
 <div id="preloader" aria-hidden="true">
   <span class="pre-eyebrow" id="preEyebrow">Deputado Estadual</span>
   <h1 class="pre-name">
-    <span class="line l1" id="preLine1"></span>
-    <span class="line l2" id="preLine2"></span>
+    <img src="assets/nome-sebastiao-oliveira.png" alt="Sebastião Oliveira" class="pre-name-logo" id="preNameLogo">
   </h1>
   <div class="pre-symbol-row" id="preSymbolRow">
     <div class="pre-logo-slot" id="preLogo"><img src="assets/logo-avante.png" alt="Logo do partido Avante"></div>
@@ -611,7 +608,7 @@ footer a{ color:var(--creme); }
      NAV
      ============================================================ -->
 <header class="site-nav" id="siteNav">
-  <a href="#top" class="nav-brand"><span class="b1">Sebastião</span> <span class="b2">Oliveira</span></a>
+  <a href="#top" class="nav-brand"><img src="assets/nome-sebastiao-oliveira.png" alt="Sebastião Oliveira" class="nav-brand-logo"></a>
   <nav class="nav-links">
     <a href="#trajetoria">Trajetória</a>
     <a href="#fizemos">O que já fizemos</a>
@@ -1068,9 +1065,6 @@ buildMosaicBand(document.getElementById('mosaicBand1'), 18);
 buildMosaicBand(document.getElementById('mosaicBand2'), 18);
 buildMosaicBand(document.getElementById('mosaicBand3'), 18);
 
-/* ---------- Monta o preloader a partir do CONFIG ---------- */
-document.getElementById('preLine1').textContent = CONFIG.primeiroNome;
-document.getElementById('preLine2').textContent = CONFIG.sobrenome;
 
 /* ============================================================
    DATA REAL — gerada dinamicamente pelo navegador (pt-BR)
@@ -1152,12 +1146,9 @@ function runIntro(){
   const tl = gsap.timeline();
 
   tl.to('#preEyebrow', { opacity: 1, duration: 0.5, ease: 'sine.out' })
-    .to('#preLine1', {
-      opacity: 1, filter: 'blur(0px)', scale: 1, duration: 1.0, ease: 'sine.out'
+    .to('#preNameLogo', {
+      opacity: 1, filter: 'blur(0px)', scale: 1, duration: 1.3, ease: 'sine.out'
     }, '+=0.1')
-    .to('#preLine2', {
-      opacity: 1, filter: 'blur(0px)', scale: 1, duration: 1.0, ease: 'sine.out'
-    }, '-=0.5')
     .to('#preSymbolRow', { opacity: 1, duration: 0.6, ease: 'sine.out' }, '+=0.2')
     .to({ val: 0 }, {
       val: parseInt(CONFIG.numero, 10),

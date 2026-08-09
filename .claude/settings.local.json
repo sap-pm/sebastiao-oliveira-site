@@ -5,7 +5,17 @@
       "WebFetch(domain:commons.wikimedia.org)",
       "Bash(curl -sL \"https://upload.wikimedia.org/wikipedia/commons/9/93/AVANTE_Brazil_Logo.png\" -o \"/c/Users/Clawb/Downloads/sebastiao-oliveira-site/assets/logo-avante.png\")",
       "Bash(python3 -)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Read(//c/Users/Clawb/Downloads/**)",
+      "Bash(mkdir -p /tmp/logos_check)",
+      "Bash(unzip -o \"Logos - Sebastião Oliveira-20260808T200059Z-1-001.zip\" -d /tmp/logos_check)",
+      "Read(//tmp/**)",
+      "Bash(pwd -W)",
+      "Bash(where magick *)",
+      "Bash(where python *)",
+      "Bash(where python3 *)",
+      "Bash(py --version)",
+      "Bash(where node *)"
     ]
   }
 }
