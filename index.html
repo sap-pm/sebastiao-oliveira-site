@@ -453,17 +453,57 @@ header.site-nav.solid{ background:rgba(246,238,220,0.92); backdrop-filter:blur(1
 .proposta-card .text-placeholder{ font-size:0.92rem; padding:16px 18px; }
 
 /* ============================================================
-   PERNAMBUCO — seção territorial
+   PERNAMBUCO — seção territorial (mapa real interativo)
    ============================================================ */
-.pe-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px; align-items:center; }
-.pe-map-wrap{ position:relative; display:flex; align-items:center; justify-content:center; }
-.pe-map-wrap svg{ width:100%; max-width:340px; height:auto; }
-.pe-regioes{ display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; margin-top:8px; }
-.pe-regiao-slot{
-  border:1.5px dashed rgba(43,32,19,0.22); border-radius:14px; padding:16px 18px;
-  background:var(--surface); font-size:12.5px; font-weight:700; color:var(--ink-soft);
-  letter-spacing:0.02em;
+.pe-intro{ max-width:680px; margin-bottom:48px; }
+.pe-interactive{
+  display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center;
+  opacity:0; transform:translateY(30px);
 }
+.pe-map-wrap{ position:relative; display:flex; align-items:center; justify-content:center; }
+.pe-map-wrap svg{ width:100%; max-width:460px; height:auto; overflow:visible; }
+
+/* Faixas de mesorregião — ver comentário no HTML sobre a aproximação de cores */
+.pe-region-rect{
+  cursor:pointer; transition:opacity 0.25s ease, filter 0.25s ease;
+  opacity:0.92;
+}
+.pe-region-rect:focus-visible{ outline:2.5px solid var(--ink); outline-offset:2px; }
+.pe-map-wrap.has-active .pe-region-rect{ opacity:0.45; }
+.pe-region-rect.is-active{ opacity:1; filter:brightness(1.08); }
+.pe-outline{ pointer-events:none; }
+
+.pe-recife-dot{ fill:var(--bg); }
+.pe-recife-pulse{
+  fill:none; stroke:var(--bg); stroke-width:1.6; transform-origin:272px 93px;
+  animation:peRecifePulse 2.2s ease-out infinite;
+}
+@keyframes peRecifePulse{
+  0%{ r:3; opacity:0.9; }
+  100%{ r:11; opacity:0; }
+}
+
+/* Painel de detalhes da região selecionada */
+.pe-panel{
+  background:var(--surface); border:1.5px solid var(--line); border-radius:20px;
+  padding:28px 26px; min-height:230px;
+}
+.pe-panel-eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:12px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase;
+  margin-bottom:10px;
+}
+.pe-panel-eyebrow .dot{ width:9px; height:9px; border-radius:50%; }
+.pe-panel h3{ font-size:1.5rem; margin-bottom:16px; }
+.pe-panel-idle{ color:var(--ink-soft); font-size:0.98rem; }
+.pe-stats-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+.pe-stat{
+  border:1.5px dashed rgba(209,91,38,0.4); background:var(--terracota-soft);
+  border-radius:14px; padding:14px 16px;
+}
+.pe-stat .pe-stat-value{ display:block; font-family:var(--font-display); font-weight:800; font-size:1.3rem; color:var(--terracota-dim); }
+.pe-stat .pe-stat-label{ display:block; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-soft); margin-top:4px; }
+.pe-panel .text-placeholder{ font-size:0.92rem; padding:16px 18px; }
 
 /* ============================================================
    COMUNIDADE
@@ -610,7 +650,7 @@ footer a{ color:var(--creme); }
   .hero-photo{ order:-1; aspect-ratio:4/5; }
   .trajetoria-grid{ grid-template-columns:1fr; gap:40px; }
   .trajetoria-carousel{ height:420px; }
-  .pe-grid{ grid-template-columns:1fr; gap:40px; }
+  .pe-interactive{ grid-template-columns:1fr; gap:32px; }
   .apoie-inner{ grid-template-columns:1fr; }
   .footer-top{ grid-template-columns:1fr; gap:36px; }
   .comunidade-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:160px; }
@@ -936,28 +976,66 @@ footer a{ color:var(--creme); }
      ============================================================ -->
 <section class="section section-alt" id="pernambuco">
   <div class="container">
-    <div class="pe-grid">
-      <div class="pe-map-wrap">
-        <!-- Representação estilizada e não-cartográfica de Pernambuco -->
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mapa estilizado de Pernambuco">
-          <path d="M40 60 L180 40 L200 70 L260 80 L270 110 L230 140 L250 190 L200 230 L150 220 L120 260 L70 240 L60 190 L30 160 L50 110 Z"
-                fill="var(--terracota-soft)" stroke="var(--terracota)" stroke-width="3" stroke-linejoin="round"/>
-          <circle cx="150" cy="150" r="6" fill="var(--terracota)"/>
+    <div class="pe-intro">
+      <span class="eyebrow">Presença territorial</span>
+      <h2 style="font-size:clamp(1.9rem,3.4vw,2.5rem); margin-bottom:20px;">Do Sertão para todo Pernambuco.</h2>
+      <p style="color:var(--ink-soft);">
+        A trajetória de Sebastião nasce no Sertão, mas caminha ao lado de todo o povo pernambucano.
+        Passe o mouse ou toque em uma região do mapa para conhecer um pouco mais sobre ela.
+      </p>
+    </div>
+
+    <div class="pe-interactive">
+      <div class="pe-map-wrap" id="peMapWrap">
+        <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" aria-label="Mapa de Pernambuco dividido em quatro mesorregiões: Sertão, Agreste, Zona da Mata e Região Metropolitana" role="img">
+          <defs>
+            <clipPath id="peMapClip">
+              <path d="M290.0,29.4 L278.1,17.9 L266.2,16.5 L256.7,18.9 L253.8,25.4 L243.8,30.4
+                       L216.5,31.3 L203.6,45.2 L201.1,41.8 L201.1,27.4 L195.2,22.4 L193.2,15.0
+                       L188.7,15.5 L184.3,10.0 L154.0,29.9 L143.5,32.3 L139.1,27.9 L128.2,29.9
+                       L124.7,25.4 L111.8,31.8 L106.8,31.3 L95.9,19.9 L91.4,19.4 L90.9,15.5
+                       L42.3,17.4 L31.3,29.9 L31.8,52.2 L24.4,55.2 L12.0,67.1 L10.0,88.9
+                       L24.9,98.9 L28.9,109.8 L66.1,109.8 L92.9,90.4 L115.7,96.4 L135.1,109.8
+                       L157.0,109.8 L165.9,104.8 L178.3,109.8 L228.4,109.8 L241.8,100.4
+                       L272.1,97.9 L281.1,93.4 L290.0,79.0 Z"/>
+            </clipPath>
+          </defs>
+
+          <!-- ============================================================
+               ATENÇÃO: as 4 faixas verticais abaixo são uma aproximação
+               visual honesta (não é a fronteira geográfica real entre as
+               mesorregiões de Sertão / Agreste / Zona da Mata / Região
+               Metropolitana). Se um contorno oficial das 4 mesorregiões
+               for obtido depois, troque estes <rect> por <path> reais,
+               mantendo o mesmo clip-path do contorno do estado.
+               ============================================================ -->
+          <g clip-path="url(#peMapClip)">
+            <rect class="pe-region-rect" data-region="sertao" x="0" y="0" width="115" height="150" fill="var(--terracota)" tabindex="0" role="button" aria-label="Sertão"></rect>
+            <rect class="pe-region-rect" data-region="agreste" x="115" y="0" width="65" height="150" fill="var(--ouro)" tabindex="0" role="button" aria-label="Agreste"></rect>
+            <rect class="pe-region-rect" data-region="mata" x="180" y="0" width="65" height="150" fill="var(--verde)" tabindex="0" role="button" aria-label="Zona da Mata"></rect>
+            <rect class="pe-region-rect" data-region="metro" x="245" y="0" width="60" height="150" fill="var(--verde-dim)" tabindex="0" role="button" aria-label="Região Metropolitana"></rect>
+          </g>
+
+          <!-- Contorno por cima, efeito "ladrilho" entre as regiões -->
+          <path class="pe-outline" d="M290.0,29.4 L278.1,17.9 L266.2,16.5 L256.7,18.9 L253.8,25.4 L243.8,30.4
+                   L216.5,31.3 L203.6,45.2 L201.1,41.8 L201.1,27.4 L195.2,22.4 L193.2,15.0
+                   L188.7,15.5 L184.3,10.0 L154.0,29.9 L143.5,32.3 L139.1,27.9 L128.2,29.9
+                   L124.7,25.4 L111.8,31.8 L106.8,31.3 L95.9,19.9 L91.4,19.4 L90.9,15.5
+                   L42.3,17.4 L31.3,29.9 L31.8,52.2 L24.4,55.2 L12.0,67.1 L10.0,88.9
+                   L24.9,98.9 L28.9,109.8 L66.1,109.8 L92.9,90.4 L115.7,96.4 L135.1,109.8
+                   L157.0,109.8 L165.9,104.8 L178.3,109.8 L228.4,109.8 L241.8,100.4
+                   L272.1,97.9 L281.1,93.4 L290.0,79.0 Z"
+                fill="none" stroke="var(--bg)" stroke-width="2.5" stroke-linejoin="round"/>
+
+          <!-- Recife -->
+          <circle class="pe-recife-pulse" cx="272" cy="93" r="3"></circle>
+          <circle class="pe-recife-dot" cx="272" cy="93" r="3"></circle>
         </svg>
       </div>
-      <div>
-        <span class="eyebrow">Presença territorial</span>
-        <h2 style="font-size:clamp(1.9rem,3.4vw,2.5rem); margin-bottom:20px;">Do Sertão para todo Pernambuco.</h2>
-        <p style="color:var(--ink-soft); max-width:520px; margin-bottom:30px;">
-          A trajetória de Sebastião nasce no Sertão, mas caminha ao lado de todo o povo pernambucano.
-          Este espaço será atualizado com regiões e municípios de atuação.
-        </p>
-        <div class="pe-regioes">
-          <div class="pe-regiao-slot">Região a definir</div>
-          <div class="pe-regiao-slot">Região a definir</div>
-          <div class="pe-regiao-slot">Região a definir</div>
-          <div class="pe-regiao-slot">Região a definir</div>
-        </div>
+
+      <div class="pe-panel" id="pePanel">
+        <!-- Preenchido dinamicamente por mapPE_renderPanel() -->
+        <p class="pe-panel-idle">Passe o mouse ou toque em uma região do mapa ao lado para ver o nome, dados e informações sobre a atuação de Sebastião por lá.</p>
       </div>
     </div>
   </div>
@@ -1390,6 +1468,119 @@ function initLoopVideo(){
 }
 initLoopVideo();
 
+/* ============================================================
+   MAPA DE PERNAMBUCO — seção territorial interativa
+   ------------------------------------------------------------
+   Hover/tap destacam uma região; clique trava a seleção (clique
+   de novo destrava). Textos e números do painel são placeholder.
+   Prefixo mapPE_ usado propositalmente para não colidir com o
+   carrossel (initCarousel) nem com o vídeo em loop (initLoopVideo).
+   ============================================================ */
+const mapPE_REGIONS = {
+  sertao: {
+    name: 'Sertão',
+    color: 'var(--terracota)',
+    municipios: 'A definir',
+    presenca: 'A definir',
+    texto: 'Informações sobre a atuação de Sebastião no Sertão entram aqui.'
+  },
+  agreste: {
+    name: 'Agreste',
+    color: 'var(--ouro)',
+    municipios: 'A definir',
+    presenca: 'A definir',
+    texto: 'Informações sobre a atuação de Sebastião no Agreste entram aqui.'
+  },
+  mata: {
+    name: 'Zona da Mata',
+    color: 'var(--verde)',
+    municipios: 'A definir',
+    presenca: 'A definir',
+    texto: 'Informações sobre a atuação de Sebastião na Zona da Mata entram aqui.'
+  },
+  metro: {
+    name: 'Região Metropolitana',
+    color: 'var(--verde-dim)',
+    municipios: 'A definir',
+    presenca: 'A definir',
+    texto: 'Informações sobre a atuação de Sebastião na Região Metropolitana entram aqui.'
+  }
+};
+
+let mapPE_locked = null;
+
+function mapPE_renderPanel(regionId){
+  const panel = document.getElementById('pePanel');
+  if(!panel) return;
+
+  if(!regionId){
+    panel.innerHTML = '<p class="pe-panel-idle">Passe o mouse ou toque em uma região do mapa ao lado para ver o nome, dados e informações sobre a atuação de Sebastião por lá.</p>';
+    return;
+  }
+
+  const r = mapPE_REGIONS[regionId];
+  panel.innerHTML =
+    '<span class="pe-panel-eyebrow" style="color:' + r.color + '">' +
+      '<span class="dot" style="background:' + r.color + '"></span>' + r.name +
+    '</span>' +
+    '<h3>' + r.name + '</h3>' +
+    '<div class="pe-stats-row">' +
+      '<div class="pe-stat"><span class="pe-stat-value">' + r.municipios + '</span><span class="pe-stat-label">Municípios</span></div>' +
+      '<div class="pe-stat"><span class="pe-stat-value">' + r.presenca + '</span><span class="pe-stat-label">Nível de presença</span></div>' +
+    '</div>' +
+    '<div class="text-placeholder">' + r.texto + '</div>';
+}
+
+function mapPE_setActive(regionId){
+  const wrap = document.getElementById('peMapWrap');
+  const rects = document.querySelectorAll('.pe-region-rect');
+  if(!wrap || !rects.length) return;
+
+  wrap.classList.toggle('has-active', !!regionId);
+  rects.forEach(rect => {
+    rect.classList.toggle('is-active', rect.dataset.region === regionId);
+  });
+  mapPE_renderPanel(regionId);
+}
+
+function mapPE_init(){
+  const wrap = document.getElementById('peMapWrap');
+  if(!wrap) return;
+  const rects = document.querySelectorAll('.pe-region-rect');
+
+  rects.forEach(rect => {
+    const id = rect.dataset.region;
+
+    rect.addEventListener('mouseenter', () => {
+      if(!mapPE_locked) mapPE_setActive(id);
+    });
+    rect.addEventListener('focus', () => {
+      if(!mapPE_locked) mapPE_setActive(id);
+    });
+
+    rect.addEventListener('click', () => {
+      if(mapPE_locked === id){
+        mapPE_locked = null;
+        mapPE_setActive(null);
+      } else {
+        mapPE_locked = id;
+        mapPE_setActive(id);
+      }
+    });
+    rect.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        rect.click();
+      }
+    });
+  });
+
+  wrap.addEventListener('mouseleave', () => {
+    mapPE_setActive(mapPE_locked);
+  });
+}
+mapPE_init();
+
 /* ---------- Sequência de intro (uma única vez por sessão) ---------- */
 const INTRO_SESSION_KEY = 'sebastiaoIntroShown';
 
@@ -1453,7 +1644,7 @@ function initProgress(){
 /* ---------- Reveals ---------- */
 function revealAll(){
   if(reduceMotion){
-    document.querySelectorAll('.t-item, .proposta-card, .feito-card, .agenda-card, .loop-video-wrap').forEach(el=>{
+    document.querySelectorAll('.t-item, .proposta-card, .feito-card, .agenda-card, .loop-video-wrap, .pe-interactive').forEach(el=>{
       el.style.opacity = 1; el.style.transform = 'none';
     });
     return;
@@ -1505,6 +1696,13 @@ function revealAll(){
   });
 
   gsap.utils.toArray('.loop-video-wrap').forEach(item => {
+    gsap.to(item, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: item, start: 'top 85%' }
+    });
+  });
+
+  gsap.utils.toArray('.pe-interactive').forEach(item => {
     gsap.to(item, {
       opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
       scrollTrigger: { trigger: item, start: 'top 85%' }
